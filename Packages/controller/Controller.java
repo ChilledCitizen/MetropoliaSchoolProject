@@ -11,13 +11,14 @@ import javafx.animation.AnimationTimer;
 
 import view.View;
 import enemy.Enemy;
+import wall.Wall;
 
 public class Controller extends Application {
-    
+
     public static void main(String[] args) {
         launch(args);
     }
- 
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Drawing Operations Test");
@@ -29,10 +30,12 @@ public class Controller extends Application {
         // Need reference to the controller for the animation timer.
         Controller controller = this;
         Enemy enemy = new Enemy(600);
+        Wall wall = new Wall(100,10,50,100);
 
-        new AnimationTimer(){
+        new AnimationTimer() {
             private long previousNanoTime;
-            public void handle(long currentNanoTime){
+
+            public void handle(long currentNanoTime) {
                 if (previousNanoTime == 0) {
                     this.previousNanoTime = currentNanoTime;
                 }
@@ -56,6 +59,16 @@ public class Controller extends Application {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         View.drawEnemy(gc, enemy);
         View.drawAmmo(gc);
-	View.drawWall(gc);
+        View.drawWall(gc);
+    }
+    
+    void updateWall(Wall wall){
+        if (wall.HP <= 0){
+            System.exit(0);
+        }
+        
+        if (wall.checkHit(wall.position) == true){
+            wall.takeDamage(25);
+        }
     }
 }

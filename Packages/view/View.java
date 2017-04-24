@@ -17,7 +17,7 @@ public class View {
         gc.setFill(Color.RED);
         gc.fillOval(375, 275, 50, 50);
     }
-    
+
     static public void drawWall(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(250, 350, 25, 250); //(x, y, w, h)
@@ -27,6 +27,6 @@ public class View {
         int y = 500;
         Image image = enemy.getImage();
         gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight(),
-            image.getWidth() + enemy.getPosition() , y, -image.getWidth(), image.getHeight());
+                image.getWidth() + enemy.getPosition(), y, -image.getWidth(), image.getHeight());
     }
 }

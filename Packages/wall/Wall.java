@@ -5,23 +5,30 @@ import enemy.Enemy;
 public class Wall {
 
     Enemy vihu = new Enemy(600);
-    int HP;
-    double height;
-    double width;
-    double position;
+    public double HP;
+    public double height;
+    public double width;
+    public double position;
 
     public Wall(double position, double width, double height, double HP) {
-
+        this.position = position;
+        this.width = width;
+        this.height = height;
+        this.HP = HP;
+        
+        
+        
     }
 
-    public boolean checkHit(double position, double height, double size) {
+    public boolean checkHit(double position) {
         if (vihu.getPosition() == position) {
             return true;
         }
         return false;
     }
 //?????
-    double takeDamage(double damage) {
+
+    public double takeDamage(double damage) {
 
         return HP - damage;
     }

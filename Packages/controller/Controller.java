@@ -12,6 +12,7 @@ import javafx.animation.AnimationTimer;
 import view.View;
 import enemy.Enemy;
 import wall.Wall;
+import model.Catapult;
 
 public class Controller extends Application {
 
@@ -31,6 +32,7 @@ public class Controller extends Application {
         Controller controller = this;
         Enemy enemy = new Enemy(600);
         Wall wall = new Wall(100,10,50,100);
+        Catapult cp = new Catapult(0);
 
         new AnimationTimer() {
             private long previousNanoTime;
@@ -68,6 +70,7 @@ public class Controller extends Application {
         }
         
         if (wall.checkHit(wall.position) == true){
+            //wall.HP = wall.takeDamage(25)
             wall.takeDamage(25);
         }
     }

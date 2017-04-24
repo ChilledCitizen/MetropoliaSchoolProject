@@ -3,6 +3,7 @@ package enemy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.awt.geom.Ellipse2D;
 import javafx.scene.image.Image;
 
 public class Enemy {
@@ -48,6 +49,13 @@ public class Enemy {
 
     public double getPosition() {
         return this.position;
+    }
+
+    public void checkHit(Ellipse2D ellipse) {
+        if (ellipse.intersects(this.position, 500, image.getWidth(), image.getHeight())) {
+            this.state = "idle";
+            this.animation = ((ArrayList) this.states.get(this.state)).iterator();
+        }
     }
 
     private void animate(double deltaTime) {

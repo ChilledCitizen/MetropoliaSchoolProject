@@ -13,6 +13,7 @@ import view.View;
 import enemy.Enemy;
 import wall.Wall;
 import model.Catapult;
+import ammo.Ammo;
 
 public class Controller extends Application {
 
@@ -33,6 +34,7 @@ public class Controller extends Application {
         Enemy enemy = new Enemy(600);
         Wall wall = new Wall(100,10,50,100);
         Catapult cp = new Catapult(0);
+        Ammo ammo = new Ammo();
 
         new AnimationTimer() {
             private long previousNanoTime;
@@ -45,22 +47,23 @@ public class Controller extends Application {
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
                 this.previousNanoTime = currentNanoTime;
 
-                controller.updateModel(deltaTime, enemy);
-                controller.updateView(gc, canvas, enemy);
+                controller.updateModel(deltaTime, enemy, ammo);
+                controller.updateView(gc, canvas, enemy, ammo);
             }
         }.start();
 
         primaryStage.show();
     }
 
-    void updateModel(double deltaTime, Enemy enemy) {
+    void updateModel(double deltaTime, Enemy enemy, Ammo ammo) {
         enemy.update(deltaTime);
+        ammo.timeStep(deltaTime);
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy) {
+    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy, Ammo ammo) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         View.drawEnemy(gc, enemy);
-        View.drawAmmo(gc);
+        View.drawAmmo(gc, ammo);
         View.drawWall(gc);
     }
     

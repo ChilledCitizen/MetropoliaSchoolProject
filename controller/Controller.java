@@ -52,5 +52,6 @@ public class Controller extends Application {
     void updateView(GraphicsContext gc, Canvas canvas) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         View.drawAmmo(gc);
+        View.drawWall(gc);
     }
 }

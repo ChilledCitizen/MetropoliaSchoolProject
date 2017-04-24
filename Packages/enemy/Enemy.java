@@ -45,7 +45,7 @@ public class Enemy {
         return this.image;
     }
 
-    public int getPosition() {
+    public double getPosition() {
         return this.position;
     }
 

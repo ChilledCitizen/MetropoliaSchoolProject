@@ -2,6 +2,7 @@ package view;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 import enemy.Enemy;
 
@@ -23,6 +24,9 @@ public class View {
     }
 
     static public void drawEnemy(GraphicsContext gc, Enemy enemy) {
-        gc.drawImage(enemy.getImage(), enemy.getPosition(), 500);
+        int y = 500;
+        Image image = enemy.getImage();
+        gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight(),
+            image.getWidth() + enemy.getPosition() , y, -image.getWidth(), image.getHeight());
     }
 }

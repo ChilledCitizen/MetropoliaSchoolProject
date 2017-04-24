@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
 import view.View;
+import enemy.Enemy;
 
 public class Controller extends Application {
     
@@ -27,6 +28,7 @@ public class Controller extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         // Need reference to the controller for the animation timer.
         Controller controller = this;
+        Enemy enemy = new Enemy(600);
 
         new AnimationTimer(){
             private long previousNanoTime;
@@ -38,20 +40,22 @@ public class Controller extends Application {
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
                 this.previousNanoTime = currentNanoTime;
 
-                controller.updateModel(deltaTime);
-                controller.updateView(gc, canvas);
+                controller.updateModel(deltaTime, enemy);
+                controller.updateView(gc, canvas, enemy);
             }
         }.start();
 
         primaryStage.show();
     }
 
-    void updateModel(double deltaTime) {
+    void updateModel(double deltaTime, Enemy enemy) {
+        enemy.update(deltaTime);
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas) {
+    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
+        View.drawEnemy(gc, enemy);
         View.drawAmmo(gc);
-        View.drawWall(gc);
+	View.drawWall(gc);
     }
 }

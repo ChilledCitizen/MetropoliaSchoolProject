@@ -3,8 +3,10 @@ package view;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+import java.awt.geom.Point2D;
 
 import enemy.Enemy;
+import ammo.Ammo;
 
 public class View {
 
@@ -13,9 +15,9 @@ public class View {
         gc.fillRect(0, 0, width, height);
     }
 
-    static public void drawAmmo(GraphicsContext gc) {
+    static public void drawAmmo(GraphicsContext gc, Ammo ammo) {
         gc.setFill(Color.RED);
-        gc.fillOval(375, 275, 50, 50);
+        gc.fillOval(ammo.getPosition().getX(), ammo.getPosition().getY(), ammo.radius*2, ammo.radius*2);
     }
 
     static public void drawWall(GraphicsContext gc, int x, int y, double w, double h) {

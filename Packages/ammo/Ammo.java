@@ -6,7 +6,7 @@ public class Ammo {
 
     private final Point2D acceleration = new Point2D.Double(0, -9.81 * 0.1); //(x, y) y=gravity*0,1
     private final Point2D position = new Point2D.Double(100, 400);
-    private final Point2D velocity = new Point2D.Double(20, 10);
+    private final Point2D velocity = new Point2D.Double(2, 1);
     public final int radius = 10;
 
     public Point2D getPosition() {
@@ -22,8 +22,10 @@ public class Ammo {
     }
 
     void timeStep(double deltaTime) {
-        scaleAddAssign(velocity, deltaTime, acceleration);
-        scaleAddAssign(position, deltaTime, velocity);
+        if (this.position.y > this.radius) {
+            scaleAddAssign(velocity, deltaTime, acceleration);
+            scaleAddAssign(position, deltaTime, velocity);
+        }
     }
 
     private static void scaleAddAssign(Point2D result, double multiplier, Point2D sum) {

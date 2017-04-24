@@ -2,6 +2,8 @@ package model;
 
 import ammo.Ammo;
 
+//KAAVA:  range=lähtönopeus^2/painovoima*sin(2*kulma)
+
 public class Catapult {
 
     public int position;
@@ -11,7 +13,7 @@ public class Catapult {
     }
 
     public void launchAmmo(double angle, double force) {
-
+        
     }
     
     void update(double time){

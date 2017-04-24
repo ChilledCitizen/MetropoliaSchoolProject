@@ -17,6 +17,7 @@ public class Enemy {
     private int frameDuration;
     private double milliSeconds;
     private ArrayList idle;
+    private ArrayList walking;
     private HashMap states;
     private String state;
     private Iterator animation;
@@ -25,17 +26,23 @@ public class Enemy {
     public Enemy(int position) {
         this.position = position;
         this.HP = 100;
-        this.idle = new ArrayList(16);
+        this.idle = new ArrayList(15);
+        this.walking = new ArrayList(10);
         String fileName;
         String gender = "male";
         for (int frame = 1; frame < 16; frame++) {
             fileName = String.format("images/zombie_animation/%s/Idle (%d).png", gender, frame);
             this.idle.add(new Image(fileName, 82, 100, true, true));
         }
+        for (frame = 1; frame < 11; frame++) {
+            fileName = String.format("images/zombie_animation/%s/Walk (%d).png", gender, frame);
+            this.walking.add(new Image(fileName, 82, 100, true, true));
+        }
         this.states = new HashMap(4);
         this.states.put("idle", this.idle);
-        this.state = "idle";
-        this.animation = this.idle.iterator();
+        this.states.put("walking", this.walking);
+        this.state = "walking";
+        this.animation = this.walking.iterator();
         this.image = (Image) this.animation.next();
         this.milliSeconds = 0;
         this.frameDuration = 100;

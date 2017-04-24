@@ -21,7 +21,7 @@ public class Ammo {
         velocity.setLocation(position);
     }
 
-    void timeStep(double deltaTime) {
+    public void timeStep(double deltaTime) {
         if (this.position.y > this.radius) {
             scaleAddAssign(velocity, deltaTime, acceleration);
             scaleAddAssign(position, deltaTime, velocity);

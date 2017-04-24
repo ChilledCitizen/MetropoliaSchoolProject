@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.geom.Ellipse2D;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -58,11 +59,14 @@ public class Controller extends Application {
     void updateModel(double deltaTime, Enemy enemy, Ammo ammo) {
         enemy.update(deltaTime);
         ammo.timeStep(deltaTime);
+        enemy.checkHit(ammo.getCircle());
     }
 
     void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy, Ammo ammo) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
-        View.drawEnemy(gc, enemy);
+        if (enemy.visible) {
+            View.drawEnemy(gc, enemy);   
+        }
         View.drawAmmo(gc, ammo);
         View.drawWall(gc);
     }

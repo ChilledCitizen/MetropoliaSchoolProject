@@ -12,11 +12,11 @@ public class Ammo {
         return new Point2D.Double(position.getX(), position.getY());
     }
     public void setPosition(Point2D position) {
-        position.setLocation(point);
+        position.setLocation(position);
     }
 
     public void setVelocity(Point2D position) {
-        velocity.setLocation(point);
+        velocity.setLocation(position);
     }
 
     void timeStep(double deltaTime) {

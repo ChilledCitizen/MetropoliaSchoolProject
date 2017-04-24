@@ -14,4 +14,8 @@ public class View {
         gc.setFill(Color.RED);
         gc.fillOval(375, 275, 50, 50);
     }
+    
+    static public void drawWall(GraphicsContext gc) {
+        gc.fillRect(600, 100, 100, 50); //(x, y, w, h)
+    }
 }

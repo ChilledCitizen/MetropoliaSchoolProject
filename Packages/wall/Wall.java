@@ -15,9 +15,6 @@ public class Wall {
         this.width = width;
         this.height = height;
         this.HP = HP;
-        
-        
-        
     }
 
     public boolean checkHit(double position) {
@@ -27,6 +24,7 @@ public class Wall {
         return false;
     }
 //?????
+    // Mitä tähän lisätään?
 
     public double takeDamage(double damage) {
 

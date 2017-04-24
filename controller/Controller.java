@@ -36,6 +36,7 @@ public class Controller extends Application {
                 }
                 // Time since previous loop in milliseconds.
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
+                this.previousNanoTime = currentNanoTime;
 
                 controller.updateModel(deltaTime);
                 controller.updateView(gc);

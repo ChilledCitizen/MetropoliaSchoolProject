@@ -18,9 +18,9 @@ public class View {
         gc.fillOval(375, 275, 50, 50);
     }
 
-    static public void drawWall(GraphicsContext gc) {
+    static public void drawWall(GraphicsContext gc, int x, int y, double w, double h) {
         gc.setFill(Color.BLACK);
-        gc.fillRect(250, 350, 25, 250); //(x, y, w, h)
+        gc.fillRect(x, y, w, h); //(x, y, w, h)
     }
 
     static public void drawEnemy(GraphicsContext gc, Enemy enemy) {

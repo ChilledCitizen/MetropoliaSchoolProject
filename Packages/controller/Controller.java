@@ -46,7 +46,7 @@ public class Controller extends Application {
                 this.previousNanoTime = currentNanoTime;
 
                 controller.updateModel(deltaTime, enemy);
-                controller.updateView(gc, canvas, enemy);
+                controller.updateView(gc, canvas, enemy, wall);
             }
         }.start();
 
@@ -57,21 +57,22 @@ public class Controller extends Application {
         enemy.update(deltaTime);
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy) {
+    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy, Wall wall) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         View.drawEnemy(gc, enemy);
         View.drawAmmo(gc);
-        View.drawWall(gc);
+        View.drawWall(gc, 200, 500, wall.width, wall.height );
     }
     
     void updateWall(Wall wall){
-        if (wall.HP <= 0){
-            System.exit(0);
-        }
         
-        if (wall.checkHit(wall.position) == true){
-            //wall.HP = wall.takeDamage(25)
-            wall.takeDamage(25);
+        
+        if (wall.checkHit() == true){
+            wall.HP = wall.takeDamage(100);
+            //wall.takeDamage(100);
+        }
+        if (wall.HP <= 0){
+            System.exit(1);
         }
     }
 }

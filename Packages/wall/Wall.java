@@ -15,19 +15,22 @@ public class Wall {
         this.width = width;
         this.height = height;
         this.HP = HP;
+        
+        
+        
     }
 
-    public boolean checkHit(double position) {
+    public boolean checkHit() {
         if (vihu.getPosition() == position) {
             return true;
         }
         return false;
     }
 //?????
-    // Mitä tähän lisätään?
 
     public double takeDamage(double damage) {
 
-        return HP - damage;
+         HP -= damage;
+         return HP;
     }
 }

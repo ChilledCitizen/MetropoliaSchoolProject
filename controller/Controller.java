@@ -39,7 +39,7 @@ public class Controller extends Application {
                 this.previousNanoTime = currentNanoTime;
 
                 controller.updateModel(deltaTime);
-                controller.updateView(gc);
+                controller.updateView(gc, canvas);
             }
         }.start();
 
@@ -49,7 +49,8 @@ public class Controller extends Application {
     void updateModel(double deltaTime) {
     }
 
-    void updateView(GraphicsContext gc) {
+    void updateView(GraphicsContext gc, Canvas canvas) {
+        View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         View.drawAmmo(gc);
     }
 }

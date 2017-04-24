@@ -20,7 +20,7 @@ public class Wall {
         }
         return false;
     }
-
+//?????
     double takeDamage(double damage) {
 
         return HP - damage;

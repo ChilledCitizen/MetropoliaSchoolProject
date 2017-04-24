@@ -17,6 +17,6 @@ public class View {
     
     static public void drawWall(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
-        gc.fillRect(200, 100, 100, 50); //(x, y, w, h)
+        gc.fillRect(250, 350, 25, 250); //(x, y, w, h)
     }
 }

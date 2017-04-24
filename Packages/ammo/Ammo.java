@@ -11,11 +11,11 @@ public class Ammo {
     public Point2D getPosition() {
         return new Point2D.Double(position.getX(), position.getY());
     }
-    public void setPosition(Point2D point) {
+    public void setPosition(Point2D position) {
         position.setLocation(point);
     }
 
-    public void setVelocity(Point2D point) {
+    public void setVelocity(Point2D position) {
         velocity.setLocation(point);
     }
 

@@ -23,4 +23,9 @@ public class Ammo {
         scaleAddAssign(velocity, deltaTime, acceleration);
         scaleAddAssign(position, deltaTime, velocity);
     }
+    private static void scaleAddAssign(Point2D result, double multiplier, Point2D sum) {
+        double x = result.getX() + multiplier * sum.getX();
+        double y = result.getY() + multiplier * sum.getY();
+        result.setLocation(x, y);
+    }
 }

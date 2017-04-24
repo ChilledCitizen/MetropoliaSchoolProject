@@ -34,7 +34,7 @@ public class Enemy {
             fileName = String.format("images/zombie_animation/%s/Idle (%d).png", gender, frame);
             this.idle.add(new Image(fileName, 82, 100, true, true));
         }
-        for (frame = 1; frame < 11; frame++) {
+        for (int frame = 1; frame < 11; frame++) {
             fileName = String.format("images/zombie_animation/%s/Walk (%d).png", gender, frame);
             this.walking.add(new Image(fileName, 82, 100, true, true));
         }

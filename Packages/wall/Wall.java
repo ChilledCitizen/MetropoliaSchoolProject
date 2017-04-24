@@ -30,6 +30,7 @@ public class Wall {
 
     public double takeDamage(double damage) {
 
-        return HP - damage;
+         HP -= damage;
+         return HP;
     }
 }

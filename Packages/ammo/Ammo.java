@@ -4,10 +4,10 @@ import java.awt.geom.Point2D;
 
 public class Ammo {
 
-    private final Point2D acceleration = new Point2D.Double(0, -9.81 * 0.1); //(x, y) y=gravity*0,1
+    private final Point2D acceleration = new Point2D.Double(0, 9.81 * 0.1); //(x, y) y=gravity*0,1
     private final Point2D position = new Point2D.Double(100, 400);
-    private final Point2D velocity = new Point2D.Double(2, 1);
-    public final int radius = 10;
+    private final Point2D velocity = new Point2D.Double(10, -15);
+    public final int radius = 40;
 
     public Point2D getPosition() {
         return new Point2D.Double(position.getX(), position.getY());
@@ -22,9 +22,9 @@ public class Ammo {
     }
 
     public void timeStep(double deltaTime) {
-        if (this.position.getY() > this.radius) {
-            scaleAddAssign(velocity, deltaTime, acceleration);
-            scaleAddAssign(position, deltaTime, velocity);
+        if (this.position.getY() <= 600 - this.radius) {
+            scaleAddAssign(velocity, deltaTime / 40, acceleration);
+            scaleAddAssign(position, deltaTime / 40, velocity);
         }
     }
 

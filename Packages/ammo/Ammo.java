@@ -5,8 +5,8 @@ import java.awt.geom.Point2D;
 public class Ammo {
 
     private final Point2D acceleration = new Point2D.Double(0, -9.81 * 0.1); //(x, y) y=gravity*0,1
-    private final Point2D position = new Point2D.Double();
-    private final Point2D velocity = new Point2D.Double();
+    private final Point2D position = new Point2D.Double(100, 400);
+    private final Point2D velocity = new Point2D.Double(20, 10);
     public final int radius = 10;
 
     public Point2D getPosition() {

@@ -68,7 +68,7 @@ public class Controller extends Application {
             View.drawEnemy(gc, enemy);   
         }
         View.drawAmmo(gc, ammo);
-        View.drawWall(gc, 200, 500, wall.width, wall.height );
+        View.drawWall(gc, (int) wall.position, 600 - (int) wall.height, wall.width, wall.height );
     }
     
     void updateWall(Wall wall){

@@ -13,9 +13,9 @@ public class Enemy {
     private int frameDuration;
     public boolean visible;
     private double milliSeconds;
-    private HashMap states;
+    private HashMap<String, ArrayList<Image>> states;
     private String state;
-    private Iterator animation;
+    private Iterator<Image> animation;
     private Image image;
 
     public Enemy(double position) {
@@ -23,9 +23,9 @@ public class Enemy {
         this.HP = 100;
         this.speed = 1;
         this.visible = true;
-        ArrayList idle = new ArrayList(15);
-        ArrayList walking = new ArrayList(10);
-        ArrayList dead = new ArrayList(12);
+        ArrayList idle = new ArrayList<Image>(15);
+        ArrayList walking = new ArrayList<Image>(10);
+        ArrayList dead = new ArrayList<Image>(12);
         String fileName;
         String gender = "male";
         for (int frame = 1; frame < 16; frame++) {
@@ -40,13 +40,13 @@ public class Enemy {
             fileName = String.format("images/zombie_animation/%s/Dead (%d).png", gender, frame);
             dead.add(new Image(fileName, 120, 110, true, true));
         }
-        this.states = new HashMap(4);
+        this.states = new HashMap<String, ArrayList<Image>>(4);
         this.states.put("idle", idle);
         this.states.put("walking", walking);
         this.states.put("dead", dead);
         this.state = "walking";
         this.animation = walking.iterator();
-        this.image = (Image) this.animation.next();
+        this.image = this.animation.next();
         this.milliSeconds = 0;
         this.frameDuration = 100;
     }
@@ -63,7 +63,7 @@ public class Enemy {
         if (ellipse.intersects(this.position, 500, image.getWidth(), image.getHeight())) {
             if (ellipse.getY() <= 600 - ellipse.getHeight() && ! this.state.equals("dead")) {
                 this.state = "dead";
-                this.animation = ((ArrayList) this.states.get(this.state)).iterator();
+                this.animation = this.states.get(this.state).iterator();
             }
         }
     }
@@ -80,7 +80,7 @@ public class Enemy {
             this.visible = false;
         }
         if (! this.animation.hasNext() && this.visible) {
-            this.animation = ((ArrayList) this.states.get(this.state)).iterator();
+            this.animation = this.states.get(this.state).iterator();
         }
     }
 
@@ -93,7 +93,7 @@ public class Enemy {
         }
         if (this.position < 300 && this.state.equals("walking")) {
             this.state = "idle";
-            this.animation = ((ArrayList) this.states.get(this.state)).iterator();
+            this.animation = this.states.get(this.state).iterator();
         }
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.awt.geom.Ellipse2D;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -32,7 +33,10 @@ public class Controller extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         // Need reference to the controller for the animation timer.
         Controller controller = this;
-        Enemy enemy = new Enemy(600);
+        ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
+        for (int i = 1; i < 4; i++) {
+            enemyList.add(new Enemy(400 + i*100));
+        }
         Wall wall = new Wall(100,10,50,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
@@ -48,26 +52,30 @@ public class Controller extends Application {
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
                 this.previousNanoTime = currentNanoTime;
 
-                controller.updateModel(deltaTime, enemy, ammo);
-                controller.updateView(gc, canvas, enemy, wall, ammo);
+                controller.updateModel(deltaTime, enemyList, ammo);
+                controller.updateView(gc, canvas, enemyList, wall, ammo);
             }
         }.start();
 
         primaryStage.show();
     }
 
-    void updateModel(double deltaTime, Enemy enemy, Ammo ammo) {
-        enemy.update(deltaTime);
+    void updateModel(double deltaTime, ArrayList<Enemy> enemyList, Ammo ammo) {
         ammo.timeStep(deltaTime);
-        if (enemy.checkHit(ammo.getCircle())) {
-            enemy.kill();
+        for (Enemy enemy : enemyList) {
+            enemy.update(deltaTime);
+            if (enemy.checkHit(ammo.getCircle())) {
+                enemy.kill();
+            }   
         }
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy, Wall wall, Ammo ammo) {
+    void updateView(GraphicsContext gc, Canvas canvas, ArrayList<Enemy> enemyList, Wall wall, Ammo ammo) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
-        if (enemy.visible) {
-            View.drawEnemy(gc, enemy);   
+        for (Enemy enemy : enemyList) {
+            if (enemy.visible) {
+                View.drawEnemy(gc, enemy);   
+            }   
         }
         View.drawAmmo(gc, ammo);
         View.drawWall(gc, (int) wall.position, 600 - (int) wall.height, wall.width, wall.height );

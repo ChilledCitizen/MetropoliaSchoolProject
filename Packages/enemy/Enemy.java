@@ -3,6 +3,7 @@ package enemy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.awt.geom.Ellipse2D;
 import javafx.scene.image.Image;
 
@@ -23,7 +24,8 @@ public class Enemy {
         ArrayList walking = new ArrayList<Image>(10);
         ArrayList dead = new ArrayList<Image>(12);
         String fileName;
-        String gender = "male";
+        Random random = new Random();
+        String gender = random.nextInt() < 0 ? "male" : "female";
         for (int frame = 1; frame < 16; frame++) {
             fileName = String.format("images/zombie_animation/%s/Idle (%d).png", gender, frame);
             idle.add(new Image(fileName, 82, 100, true, true));

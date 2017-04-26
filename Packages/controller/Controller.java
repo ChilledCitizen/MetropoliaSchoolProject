@@ -59,7 +59,9 @@ public class Controller extends Application {
     void updateModel(double deltaTime, Enemy enemy, Ammo ammo) {
         enemy.update(deltaTime);
         ammo.timeStep(deltaTime);
-        enemy.checkHit(ammo.getCircle());
+        if (enemy.checkHit(ammo.getCircle())) {
+            enemy.kill();
+        }
     }
 
     void updateView(GraphicsContext gc, Canvas canvas, Enemy enemy, Wall wall, Ammo ammo) {

@@ -51,12 +51,15 @@ public class Enemy {
         return this.position;
     }
 
-    public void checkHit(Ellipse2D ellipse) {
-        if (ellipse.intersects(this.position, 500, image.getWidth(), image.getHeight())) {
-            if (ellipse.getY() <= 600 - ellipse.getHeight() && ! this.state.equals("dead")) {
-                this.state = "dead";
-                this.animation = this.states.get(this.state).iterator();
-            }
+    public boolean checkHit(Ellipse2D ellipse) {
+        return (ellipse.intersects(this.position, 500, image.getWidth(), image.getHeight())
+            && ellipse.getY() <= 600 - ellipse.getHeight());
+    }
+
+    public void kill() {
+        if (! this.state.equals("dead")) {
+            this.state = "dead";
+            this.animation = this.states.get(this.state).iterator();
         }
     }
 

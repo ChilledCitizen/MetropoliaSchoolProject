@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.stream.IntStream;
 import java.awt.geom.Ellipse2D;
 import javafx.scene.image.Image;
 
@@ -13,35 +14,50 @@ public class Enemy {
     private int frameDuration = 100;
     public boolean visible = true;
     private double milliSeconds = 0;
-    private HashMap<String, ArrayList<Image>> states = new HashMap(4);
+    private static class Animations {
+        public HashMap<String, ArrayList<Image>> male = new HashMap(4);
+        public HashMap<String, ArrayList<Image>> female = new HashMap(4);
+
+        public Animations() {
+            ArrayList idle1 = new ArrayList<Image>(15);
+            ArrayList walking1 = new ArrayList<Image>(10);
+            ArrayList dead1 = new ArrayList<Image>(12);
+            ArrayList idle2 = new ArrayList<Image>(15);
+            ArrayList walking2 = new ArrayList<Image>(10);
+            ArrayList dead2 = new ArrayList<Image>(12);
+
+            this.male.put("idle", idle1);
+            this.male.put("walking", walking1);
+            this.male.put("dead", dead1);
+            this.female.put("idle", idle2);
+            this.female.put("walking", walking2);
+            this.female.put("dead", dead2);
+
+            HashMap<String, HashMap<String, ArrayList<Image>>> animationMap = new HashMap(2);
+            animationMap.put("male", male);
+            animationMap.put("female", female);
+            String fmt1 = "images/zombie_animation/%s/%s (%d).png";
+            String fmt2 = "images/zombie_animation/%s/%s (%d).png";
+
+            animationMap.forEach((k, v) -> IntStream.range(1, 16).forEach(
+                (i) -> v.get("idle").add(new Image(String.format(fmt1, k, "Idle", i), 82, 100, true, true))));
+            animationMap.forEach((k, v) -> IntStream.range(1, 11).forEach(
+                (i) -> v.get("walking").add(new Image(String.format(fmt1, k, "Walk", i), 82, 100, true, true))));
+            animationMap.forEach((k, v) -> IntStream.range(1, 13).forEach(
+                (i) -> v.get("dead").add(new Image(String.format(fmt1, k, "Dead", i), 100, 110, true, true))));
+        }
+    }
+    private static Animations animations = new Animations();
     private String state = "walking";
     private Iterator<Image> animation;
     private Image image;
+    private HashMap<String, ArrayList<Image>> states;
 
     public Enemy(double position) {
         this.position = position;
-        ArrayList idle = new ArrayList<Image>(15);
-        ArrayList walking = new ArrayList<Image>(10);
-        ArrayList dead = new ArrayList<Image>(12);
-        String fileName;
         Random random = new Random();
-        String gender = random.nextInt() < 0 ? "male" : "female";
-        for (int frame = 1; frame < 16; frame++) {
-            fileName = String.format("images/zombie_animation/%s/Idle (%d).png", gender, frame);
-            idle.add(new Image(fileName, 82, 100, true, true));
-        }
-        for (int frame = 1; frame < 11; frame++) {
-            fileName = String.format("images/zombie_animation/%s/Walk (%d).png", gender, frame);
-            walking.add(new Image(fileName, 82, 100, true, true));
-        }
-        for (int frame = 1; frame < 13; frame++) {
-            fileName = String.format("images/zombie_animation/%s/Dead (%d).png", gender, frame);
-            dead.add(new Image(fileName, 120, 110, true, true));
-        }
-        this.states.put("idle", idle);
-        this.states.put("walking", walking);
-        this.states.put("dead", dead);
-        this.animation = walking.iterator();
+        this.states = random.nextInt() < 0 ? animations.male : animations.female;
+        this.animation = this.states.get(this.state).iterator();
         this.image = this.animation.next();
     }
 

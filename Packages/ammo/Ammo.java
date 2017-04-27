@@ -5,9 +5,9 @@ import java.awt.geom.Ellipse2D;
 
 public class Ammo {
 
-    private final Point2D acceleration = new Point2D.Double(0, 9.81 * 0.1); //(x, y) y=gravity*0,1
-    private final Point2D position = new Point2D.Double(100, 400);
-    private final Point2D velocity = new Point2D.Double(10, -15);
+    public final Point2D acceleration = new Point2D.Double(0, 9.81 * 0.1); //(x, y) y=gravity*0,1
+    public final Point2D position = new Point2D.Double(100, 400);
+    public final Point2D velocity = new Point2D.Double(10, -15);
     public final int radius = 15;
 
     public Point2D getPosition() {
@@ -18,19 +18,21 @@ public class Ammo {
         return new Ellipse2D.Double(position.getX(), position.getY(), this.radius*2, this.radius*2);
     }
 
-    public void setPosition(Point2D position) {
-        position.setLocation(position);
+    public void enableGravity() {
+        this.acceleration.setLocation(0, 9.81 * 0.1);
     }
 
-    public void setVelocity(Point2D position) {
-        velocity.setLocation(position);
+    public void stop() {
+        this.acceleration.setLocation(0, 0);
+        this.velocity.setLocation(0, 0);
     }
 
     public void timeStep(double deltaTime) {
-        if (this.position.getY() <= 600 - this.radius*2) {
-            scaleAddAssign(velocity, deltaTime / 40, acceleration);
-            scaleAddAssign(position, deltaTime / 40, velocity);
+        if (this.position.getY() > 600 - this.radius*2) {
+            this.stop();
         }
+        scaleAddAssign(this.velocity, deltaTime / 40, this.acceleration);
+        scaleAddAssign(this.position, deltaTime / 40, this.velocity);
     }
 
     private static void scaleAddAssign(Point2D result, double multiplier, Point2D sum) {

@@ -33,7 +33,7 @@ public class Controller extends Application {
         for (int i = 1; i < 4; i++) {
             enemyList.add(new Enemy(400 + i*100));
         }
-        Wall wall = new Wall(100,10,50,100);
+        Wall wall = new Wall(100,25,120,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
 

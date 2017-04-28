@@ -41,7 +41,7 @@ public class View {
         gc.setLineWidth(5);
         gc.strokeLine(25, 588, 75, 588);
         gc.strokeLine(25, 588, 50, 563);
-        gc.strokeLine(50, 563, 12, 563);
+        gc.strokeLine(50, 563, catapult.arm.getX(), catapult.arm.getY());
         gc.strokeLine(50, 563, 75, 588);
     }
 }

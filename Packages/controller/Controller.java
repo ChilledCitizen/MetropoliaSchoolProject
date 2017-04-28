@@ -2,16 +2,13 @@ package controller;
 
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
-import java.awt.geom.Ellipse2D;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 
@@ -20,6 +17,10 @@ import enemy.Enemy;
 import wall.Wall;
 import model.Catapult;
 import ammo.Ammo;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 public class Controller extends Application {
 
@@ -36,6 +37,7 @@ public class Controller extends Application {
         Wall wall = new Wall(100,25,120,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
+        createSliders();
 
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
@@ -118,5 +120,16 @@ public class Controller extends Application {
         if (wall.HP <= 0){
             System.exit(1);
         }
+    }
+    private void createSliders() {
+        JPanel gUI = new JPanel(new GridLayout(1,0));
+        
+        gUI.add(new JLabel("Angle"));
+        JSlider angleSlider = new JSlider(0, 90);
+        gUI.add(angleSlider);
+        
+        gUI.add(new JLabel("Force"));
+        JSlider forceSlider = new JSlider(0,100);
+        gUI.add(forceSlider);
     }
 }

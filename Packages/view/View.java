@@ -9,6 +9,7 @@ import java.awt.geom.Point2D;
 import enemy.Enemy;
 import ammo.Ammo;
 import model.Catapult;
+import wall.Wall;
 
 public class View {
 
@@ -47,4 +48,10 @@ public class View {
     }
     
    
+    static public void drawHealthBar(GraphicsContext gc, Wall wall) {
+        gc.setFill(Color.GREEN);
+        gc.fillRect(wall.position + wall.width/2 - wall.HP/2, 600 - wall.height - 40, 100, 20);
+        gc.setFill(Color.RED);
+        gc.fillRect(wall.position + wall.width/2 - wall.HP/2 + wall.HP, 600 - wall.height - 40, 100 - wall.HP, 20);
+    }
 }

@@ -123,6 +123,7 @@ public class Controller extends Application {
         }
         View.drawAmmo(this.gc, this.ammo);
         View.drawWall(this.gc, (int) this.wall.position, 600 - (int) this.wall.height, this.wall.width, this.wall.height );
+        View.drawHealthBar(this.gc, this.wall);
         View.drawCatapult(this.gc, this.cp);
     }
     

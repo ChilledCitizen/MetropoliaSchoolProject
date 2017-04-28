@@ -23,6 +23,12 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 public class Controller extends Application {
+    private ArrayList<Enemy> enemyList;
+    private Wall wall = new Wall(100,25,120,100);
+    private Ammo ammo = new Ammo();
+    private Catapult cp = new Catapult(0, ammo);
+    private Canvas canvas = new Canvas(800, 600);
+    private GraphicsContext gc = this.canvas.getGraphicsContext2D();
 
     public static void main(String[] args) {
         launch(args);
@@ -30,20 +36,18 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
+        this.enemyList = new ArrayList<Enemy>(10);
         for (int i = 1; i < 4; i++) {
             enemyList.add(new Enemy(400 + i*100));
         }
-        Wall wall = new Wall(100,25,120,100);
-        Ammo ammo = new Ammo();
         createSliders();
-        Catapult cp = new Catapult(0, ammo);
 
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
-        Canvas canvas = new Canvas(800, 600);
-        root.getChildren().add(canvas);
+        root.getChildren().add(this.canvas);
         Scene scene = new Scene(root);
+        // Need reference to the controller for the animation timer and event handler.
+        Controller controller = this;
         scene.setOnKeyPressed(
             new EventHandler<KeyEvent>()
             {
@@ -51,26 +55,26 @@ public class Controller extends Application {
                 {
                     switch(event.getCode()) {
                         case SPACE:
-                            if (ammo.position.equals(Ammo.startingPos)
-                                    && ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
+                            if (controller.ammo.position.equals(Ammo.startingPos)
+                                    && controller.ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
                                 cp.shoot(130.0);
                             }
                             break;
                         case R:
-                            ammo.position.setLocation(Ammo.startingPos);
-                            ammo.stop();
-                            cp.reset();
+                            controller.ammo.position.setLocation(Ammo.startingPos);
+                            controller.ammo.stop();
+                            controller.cp.reset();
                             break;
                             
                         case ENTER: 
-                            ammo.position.setLocation(Ammo.startingPos);
-                            ammo.stop();
-                            wall.HP = 100;
-                            enemyList.clear();
+                            controller.ammo.position.setLocation(Ammo.startingPos);
+                            controller.ammo.stop();
+                            controller.wall.HP = 100;
+                            controller.enemyList.clear();
                             for (int i = 0; i < 4; i++) {
-                            enemyList.add(new Enemy(400 + i*100));
+                            controller.enemyList.add(new Enemy(400 + i*100));
                             }
-                            cp.reset();
+                            controller.cp.reset();
                             break;
                             
                             
@@ -79,9 +83,6 @@ public class Controller extends Application {
                 }
             });
         primaryStage.setScene(scene);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        // Need reference to the controller for the animation timer.
-        Controller controller = this;
 
         new AnimationTimer() {
             private long previousNanoTime;
@@ -94,45 +95,45 @@ public class Controller extends Application {
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
                 this.previousNanoTime = currentNanoTime;
 
-                controller.updateModel(deltaTime, enemyList, ammo, cp);
-                controller.updateView(gc, canvas, enemyList, wall, ammo, cp);
+                controller.updateModel(deltaTime);
+                controller.updateView();
             }
         }.start();
 
         primaryStage.show();
     }
 
-    void updateModel(double deltaTime, ArrayList<Enemy> enemyList, Ammo ammo, Catapult cp) {
-        cp.update(deltaTime);
-        ammo.timeStep(deltaTime);
-        for (Enemy enemy : enemyList) {
+    void updateModel(double deltaTime) {
+        this.cp.update(deltaTime);
+        this.ammo.timeStep(deltaTime);
+        for (Enemy enemy : this.enemyList) {
             enemy.update(deltaTime);
-            if (enemy.checkHit(ammo.getCircle())) {
+            if (enemy.checkHit(this.ammo.getCircle())) {
                 enemy.kill();
             }   
         }
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas, ArrayList<Enemy> enemyList, Wall wall, Ammo ammo, Catapult cp) {
-        View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
-        for (Enemy enemy : enemyList) {
+    void updateView() {
+        View.drawBackground(this.gc, this.canvas.getWidth(), this.canvas.getHeight());
+        for (Enemy enemy : this.enemyList) {
             if (enemy.visible) {
-                View.drawEnemy(gc, enemy);   
+                View.drawEnemy(this.gc, enemy);   
             }   
         }
-        View.drawAmmo(gc, ammo);
-        View.drawWall(gc, (int) wall.position, 600 - (int) wall.height, wall.width, wall.height );
-        View.drawCatapult(gc, cp);
+        View.drawAmmo(this.gc, this.ammo);
+        View.drawWall(this.gc, (int) this.wall.position, 600 - (int) this.wall.height, this.wall.width, this.wall.height );
+        View.drawCatapult(this.gc, this.cp);
     }
     
-    void updateWall(Wall wall){
+    void updateWall(){
         
         
-        if (wall.checkHit()){
-            wall.takeDamage(100);
-            //wall.takeDamage(100);
+        if (this.wall.checkHit()){
+            this.wall.takeDamage(100);
+            //this.wall.takeDamage(100);
         }
-        if (wall.HP <= 0){
+        if (this.wall.HP <= 0){
             System.exit(1);
         }
     }

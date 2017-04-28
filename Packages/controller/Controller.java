@@ -18,6 +18,7 @@ import wall.Wall;
 import model.Catapult;
 import ammo.Ammo;
 import java.awt.GridLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -37,7 +38,7 @@ public class Controller extends Application {
         Wall wall = new Wall(100,25,120,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
-        createSliders();
+        createSliders(); //luo muttei näytä HOW FIX WAT
 
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
@@ -122,6 +123,13 @@ public class Controller extends Application {
         }
     }
     private void createSliders() {
+        JFrame frame = new JFrame();
+        
+       frame.setSize(800, 100);
+        frame.setLayout(new GridLayout(2, 1));
+       
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         JPanel gUI = new JPanel(new GridLayout(1,0));
         
         gUI.add(new JLabel("Angle"));
@@ -131,5 +139,9 @@ public class Controller extends Application {
         gUI.add(new JLabel("Force"));
         JSlider forceSlider = new JSlider(0,100);
         gUI.add(forceSlider);
+        
+        frame.add(angleSlider);
+        frame.add(forceSlider);
+        frame.setVisible(true);
     }
 }

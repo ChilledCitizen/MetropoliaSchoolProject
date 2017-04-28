@@ -21,7 +21,7 @@ public class Wall {
     }
 
     public boolean checkHit() {
-        if (vihu.getPosition() == position) {
+        if (vihu.getPosition() == this.position) {
             return true;
         }
         return false;
@@ -30,7 +30,7 @@ public class Wall {
 
     public double takeDamage(double damage) {
 
-         HP -= damage;
+         this.HP -= damage;
          return HP;
     }
 }

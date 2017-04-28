@@ -34,7 +34,7 @@ public class Controller extends Application {
         for (int i = 1; i < 4; i++) {
             enemyList.add(new Enemy(400 + i*100));
         }
-        Wall wall = new Wall(100,25,120,100);
+        Wall wall = new Wall(350,25,120,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
         createSliders();
@@ -126,8 +126,8 @@ public class Controller extends Application {
     void updateWall(Wall wall){
         
         
-        if (wall.checkHit() == true){
-            wall.HP = wall.takeDamage(100);
+        if (wall.checkHit()){
+            wall.takeDamage(100);
             //wall.takeDamage(100);
         }
         if (wall.HP <= 0){

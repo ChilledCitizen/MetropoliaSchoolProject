@@ -62,6 +62,19 @@ public class Controller extends Application {
                             ammo.position.setLocation(100.0, 400.0);
                             ammo.stop();
                             break;
+                            
+                        case ENTER: 
+                            ammo.position.setLocation(100.0, 400.0);
+                            ammo.stop();
+                            wall.HP = 100;
+                            enemyList.clear();
+                            for (int i = 0; i < 4; i++) {
+                            enemyList.add(new Enemy(400 + i*100));
+                            }
+                            break;
+                            
+                            
+                           
                     }
                 }
             });

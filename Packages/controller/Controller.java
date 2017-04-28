@@ -79,7 +79,7 @@ public class Controller extends Application {
                 this.previousNanoTime = currentNanoTime;
 
                 controller.updateModel(deltaTime, enemyList, ammo);
-                controller.updateView(gc, canvas, enemyList, wall, ammo);
+                controller.updateView(gc, canvas, enemyList, wall, ammo, cp);
             }
         }.start();
 
@@ -96,7 +96,7 @@ public class Controller extends Application {
         }
     }
 
-    void updateView(GraphicsContext gc, Canvas canvas, ArrayList<Enemy> enemyList, Wall wall, Ammo ammo) {
+    void updateView(GraphicsContext gc, Canvas canvas, ArrayList<Enemy> enemyList, Wall wall, Ammo ammo, Catapult cp) {
         View.drawBackground(gc, canvas.getWidth(), canvas.getHeight());
         for (Enemy enemy : enemyList) {
             if (enemy.visible) {
@@ -105,6 +105,7 @@ public class Controller extends Application {
         }
         View.drawAmmo(gc, ammo);
         View.drawWall(gc, (int) wall.position, 600 - (int) wall.height, wall.width, wall.height );
+        View.drawCatapult(gc, cp);
     }
     
     void updateWall(Wall wall){

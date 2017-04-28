@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 
 import enemy.Enemy;
 import ammo.Ammo;
+import model.Catapult;
 
 public class View {
 
@@ -30,5 +31,17 @@ public class View {
         Image image = enemy.getImage();
         gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight(),
             image.getWidth() + (int) enemy.getPosition() , y, -image.getWidth(), image.getHeight());
+    }
+
+    static public void drawCatapult(GraphicsContext gc, Catapult catapult) {
+        gc.setFill(Color.BROWN);
+        gc.fillOval(12, 575, 25, 25);
+        gc.fillOval(62, 575, 25, 25);
+        gc.setStroke(Color.BROWN);
+        gc.setLineWidth(5);
+        gc.strokeLine(25, 588, 75, 588);
+        gc.strokeLine(25, 588, 50, 563);
+        gc.strokeLine(50, 563, 12, 563);
+        gc.strokeLine(50, 563, 75, 588);
     }
 }

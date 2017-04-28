@@ -12,6 +12,7 @@ public class Catapult {
     private Ammo ammo;
     private boolean shooting;
     private double angle;
+    private double rotationSpeed;
     private int armLength;
     private Point2D middle;
     public Point2D arm;
@@ -26,6 +27,7 @@ public class Catapult {
     public void reset() {
         this.shooting = false;
         this.angle = 180.0;
+        this.rotationSpeed = 0;
         this.armLength = 38;
         this.middle = new Point2D.Double(50, 563);
         this.arm = new Point2D.Double(
@@ -41,7 +43,8 @@ public class Catapult {
     public void update(double time){
         Point2D ammoCenter = new Point2D.Double(this.ammo.getCircle().getCenterX(), this.ammo.getCircle().getCenterY());
         if (this.shooting && this.arm.distance(ammoCenter) <= this.ammo.radius) {
-            this.angle -= (1 + this.arm.distance(this.middle)/20.0)*time/8.0;
+            this.rotationSpeed += this.arm.distance(this.middle)*time/40.0;
+            this.angle -= this.rotationSpeed * time / 160.0;
             this.arm = new Point2D.Double(
                 this.armLength*Math.cos(Math.toRadians(this.angle)) + 50, -this.armLength*Math.sin(Math.toRadians(this.angle)) + 563);
             this.ammo.position.setLocation(this.arm.getX() - this.ammo.radius, this.arm.getY() - this.ammo.radius);

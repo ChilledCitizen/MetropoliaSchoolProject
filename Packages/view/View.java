@@ -44,4 +44,6 @@ public class View {
         gc.strokeLine(50, 563, 12, 563);
         gc.strokeLine(50, 563, 75, 588);
     }
+    
+   
 }

@@ -22,20 +22,23 @@ import model.Catapult;
 import ammo.Ammo;
 
 public class Controller extends Application {
+    
+    
 
     public static void main(String[] args) {
         launch(args);
     }
-
+   
     @Override
     public void start(Stage primaryStage) {
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
-        for (int i = 1; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             enemyList.add(new Enemy(400 + i*100));
         }
         Wall wall = new Wall(100,25,120,100);
         Catapult cp = new Catapult(0);
         Ammo ammo = new Ammo();
+        
 
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
@@ -59,6 +62,19 @@ public class Controller extends Application {
                             ammo.position.setLocation(100.0, 400.0);
                             ammo.stop();
                             break;
+                            
+                        case ENTER: 
+                            ammo.position.setLocation(100.0, 400.0);
+                            ammo.stop();
+                            wall.HP = 100;
+                            enemyList.clear();
+                            for (int i = 0; i < 4; i++) {
+                            enemyList.add(new Enemy(400 + i*100));
+                            }
+                            break;
+                            
+                            
+                           
                     }
                 }
             });
@@ -119,4 +135,6 @@ public class Controller extends Application {
             System.exit(1);
         }
     }
+    
+  
 }

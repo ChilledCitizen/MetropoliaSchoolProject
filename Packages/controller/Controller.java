@@ -126,7 +126,7 @@ public class Controller extends Application {
         JFrame frame = new JFrame();
         
        frame.setSize(800, 100);
-        frame.setLayout(new GridLayout(2, 1));
+        frame.setLayout(new GridLayout(1, 2));
        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -135,12 +135,15 @@ public class Controller extends Application {
         gUI.add(new JLabel("Angle"));
         JSlider angleSlider = new JSlider(0, 90);
         gUI.add(angleSlider);
+        angleSlider.setPaintLabels(true);
         
         gUI.add(new JLabel("Force"));
         JSlider forceSlider = new JSlider(0,100);
         gUI.add(forceSlider);
+        forceSlider.setPaintLabels(true);
         
         frame.add(angleSlider);
+        //frame.add();
         frame.add(forceSlider);
         frame.setVisible(true);
     }

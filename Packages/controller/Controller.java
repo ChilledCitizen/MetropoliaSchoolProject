@@ -51,25 +51,26 @@ public class Controller extends Application {
                 {
                     switch(event.getCode()) {
                         case SPACE:
-                            if (ammo.position.equals(new Point2D.Double(-3.0, 548.0))
+                            if (ammo.position.equals(Ammo.startingPos)
                                     && ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
                                 cp.shoot(130.0);
                             }
                             break;
                         case R:
-                            ammo.position.setLocation(-3.0, 548.0);
+                            ammo.position.setLocation(Ammo.startingPos);
                             ammo.stop();
                             cp.reset();
                             break;
                             
                         case ENTER: 
-                            ammo.position.setLocation(100.0, 400.0);
+                            ammo.position.setLocation(Ammo.startingPos);
                             ammo.stop();
                             wall.HP = 100;
                             enemyList.clear();
                             for (int i = 0; i < 4; i++) {
                             enemyList.add(new Enemy(400 + i*100));
                             }
+                            cp.reset();
                             break;
                             
                             

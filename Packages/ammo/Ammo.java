@@ -5,8 +5,9 @@ import java.awt.geom.Ellipse2D;
 
 public class Ammo {
 
+    public static final Point2D startingPos = new Point2D.Double(-3.0, 548.0);
     public final Point2D acceleration = new Point2D.Double(0, 0);
-    public final Point2D position = new Point2D.Double(-3, 548);
+    public final Point2D position = (Point2D) startingPos.clone();
     public final Point2D velocity = new Point2D.Double(0, 0);
     public final int radius = 15;
 

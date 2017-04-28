@@ -5,9 +5,10 @@ import java.awt.geom.Ellipse2D;
 
 public class Ammo {
 
-    public final Point2D acceleration = new Point2D.Double(0, 9.81 * 0.1); //(x, y) y=gravity*0,1
-    public final Point2D position = new Point2D.Double(100, 400);
-    public final Point2D velocity = new Point2D.Double(10, -15);
+    public static final Point2D startingPos = new Point2D.Double(-3.0, 548.0);
+    public final Point2D acceleration = new Point2D.Double(0, 0);
+    public final Point2D position = (Point2D) startingPos.clone();
+    public final Point2D velocity = new Point2D.Double(0, 0);
     public final int radius = 15;
 
     public Point2D getPosition() {
@@ -35,7 +36,7 @@ public class Ammo {
         scaleAddAssign(this.position, deltaTime / 40, this.velocity);
     }
 
-    private static void scaleAddAssign(Point2D result, double multiplier, Point2D sum) {
+    public static void scaleAddAssign(Point2D result, double multiplier, Point2D sum) {
         double x = result.getX() + multiplier * sum.getX();
         double y = result.getY() + multiplier * sum.getY();
         result.setLocation(x, y);

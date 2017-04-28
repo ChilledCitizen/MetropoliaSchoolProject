@@ -34,10 +34,10 @@ public class Controller extends Application {
         for (int i = 1; i < 4; i++) {
             enemyList.add(new Enemy(400 + i*100));
         }
-        Wall wall = new Wall(350,25,120,100);
-        Catapult cp = new Catapult(0);
+        Wall wall = new Wall(100,25,120,100);
         Ammo ammo = new Ammo();
         createSliders();
+        Catapult cp = new Catapult(0, ammo);
 
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
@@ -51,25 +51,26 @@ public class Controller extends Application {
                 {
                     switch(event.getCode()) {
                         case SPACE:
-                            if (ammo.position.equals(new Point2D.Double(100.0, 400.0))
+                            if (ammo.position.equals(Ammo.startingPos)
                                     && ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
-                                ammo.enableGravity();
-                                ammo.velocity.setLocation(10.0, -15.0);
-                                }
+                                cp.shoot(130.0);
+                            }
                             break;
                         case R:
-                            ammo.position.setLocation(100.0, 400.0);
+                            ammo.position.setLocation(Ammo.startingPos);
                             ammo.stop();
+                            cp.reset();
                             break;
                             
                         case ENTER: 
-                            ammo.position.setLocation(100.0, 400.0);
+                            ammo.position.setLocation(Ammo.startingPos);
                             ammo.stop();
                             wall.HP = 100;
                             enemyList.clear();
                             for (int i = 0; i < 4; i++) {
                             enemyList.add(new Enemy(400 + i*100));
                             }
+                            cp.reset();
                             break;
                             
                             
@@ -93,7 +94,7 @@ public class Controller extends Application {
                 double deltaTime = (currentNanoTime - this.previousNanoTime) / 1000000.0;
                 this.previousNanoTime = currentNanoTime;
 
-                controller.updateModel(deltaTime, enemyList, ammo);
+                controller.updateModel(deltaTime, enemyList, ammo, cp);
                 controller.updateView(gc, canvas, enemyList, wall, ammo, cp);
             }
         }.start();
@@ -101,7 +102,8 @@ public class Controller extends Application {
         primaryStage.show();
     }
 
-    void updateModel(double deltaTime, ArrayList<Enemy> enemyList, Ammo ammo) {
+    void updateModel(double deltaTime, ArrayList<Enemy> enemyList, Ammo ammo, Catapult cp) {
+        cp.update(deltaTime);
         ammo.timeStep(deltaTime);
         for (Enemy enemy : enemyList) {
             enemy.update(deltaTime);

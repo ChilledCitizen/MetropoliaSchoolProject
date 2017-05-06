@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.geom.Point2D;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -106,11 +107,18 @@ public class Controller extends Application {
     void updateModel(double deltaTime) {
         this.cp.update(deltaTime);
         this.ammo.timeStep(deltaTime);
-        for (Enemy enemy : this.enemyList) {
+        Iterator<Enemy> enemyIter = this.enemyList.iterator();
+        Enemy enemy;
+        while (enemyIter.hasNext()) {
+            enemy =  enemyIter.next();
             enemy.update(deltaTime);
             if (enemy.checkHit(this.ammo.getCircle())) {
                 enemy.kill();
-            }   
+            }
+            if (! enemy.visible && enemy.getState().equals("attack")) {
+                this.wall.takeDamage(25);
+                enemyIter.remove();
+            }
         }
     }
 

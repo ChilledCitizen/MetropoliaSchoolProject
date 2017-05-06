@@ -35,9 +35,8 @@ public class Catapult {
         this.stopAngle = 90;
     }
 
-    public void shoot(double angle) {
+    public void shoot() {
         this.shooting = true;
-        this.stopAngle = angle;
     }
     
     public void update(double time){

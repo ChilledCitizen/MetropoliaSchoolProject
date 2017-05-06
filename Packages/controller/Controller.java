@@ -58,7 +58,7 @@ public class Controller extends Application {
                         case SPACE:
                             if (controller.ammo.position.equals(Ammo.startingPos)
                                     && controller.ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
-                                cp.shoot(130.0);
+                                cp.shoot();
                             }
                             break;
                         case R:

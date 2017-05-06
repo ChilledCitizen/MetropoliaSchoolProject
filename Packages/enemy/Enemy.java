@@ -75,6 +75,10 @@ public class Enemy {
         return this.position;
     }
 
+    public String getState() {
+        return this.state;
+    }
+
     public boolean checkHit(Ellipse2D ellipse) {
         return (ellipse.intersects(this.position, 500, image.getWidth(), image.getHeight())
             && ellipse.getY() <= 600 - ellipse.getHeight());

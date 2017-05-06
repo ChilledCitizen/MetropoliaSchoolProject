@@ -22,16 +22,20 @@ public class Enemy {
             ArrayList idle1 = new ArrayList<Image>(15);
             ArrayList walking1 = new ArrayList<Image>(10);
             ArrayList dead1 = new ArrayList<Image>(12);
+            ArrayList attack1 = new ArrayList<Image>(8);
             ArrayList idle2 = new ArrayList<Image>(15);
             ArrayList walking2 = new ArrayList<Image>(10);
             ArrayList dead2 = new ArrayList<Image>(12);
+            ArrayList attack2 = new ArrayList<Image>(8);
 
             this.male.put("idle", idle1);
             this.male.put("walking", walking1);
             this.male.put("dead", dead1);
+            this.male.put("attack", attack1);
             this.female.put("idle", idle2);
             this.female.put("walking", walking2);
             this.female.put("dead", dead2);
+            this.female.put("attack", attack2);
 
             HashMap<String, HashMap<String, ArrayList<Image>>> animationMap = new HashMap(2);
             animationMap.put("male", male);
@@ -45,6 +49,8 @@ public class Enemy {
                 (i) -> v.get("walking").add(new Image(String.format(fmt1, k, "Walk", i), 82, 100, true, true))));
             animationMap.forEach((k, v) -> IntStream.range(1, 13).forEach(
                 (i) -> v.get("dead").add(new Image(String.format(fmt1, k, "Dead", i), 100, 110, true, true))));
+            animationMap.forEach((k, v) -> IntStream.range(1, 9).forEach(
+                (i) -> v.get("attack").add(new Image(String.format(fmt1, k, "Attack", i), 82, 100, true, true))));
         }
     }
     private static Animations animations = new Animations();
@@ -89,7 +95,7 @@ public class Enemy {
             if (this.state.equals("dead")) {
             }
         }
-        if (! this.animation.hasNext() && this.state.equals("dead")) {
+        if (! this.animation.hasNext() && (this.state.equals("dead") || this.state.equals("attack"))) {
             this.visible = false;
         }
         if (! this.animation.hasNext() && this.visible) {
@@ -104,8 +110,8 @@ public class Enemy {
         if (this.state.equals("walking")) {
             this.position -= this.speed * deltaTime / 10;
         }
-        if (this.position < 300 && this.state.equals("walking")) {
-            this.state = "idle";
+        if (this.position < 125 && this.state.equals("walking")) {
+            this.state = "attack";
             this.animation = this.states.get(this.state).iterator();
         }
     }

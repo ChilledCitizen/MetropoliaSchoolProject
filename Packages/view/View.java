@@ -54,4 +54,9 @@ public class View {
         gc.setFill(Color.RED);
         gc.fillRect(wall.position + wall.width/2 - 50 + wall.HP, 600 - wall.height - 40, 100 - wall.HP, 20);
     }
+
+    static public void drawAngle(GraphicsContext gc, double angle) {
+        gc.setFill(Color.BLACK);
+        gc.fillText(String.valueOf(angle), 5, 10);
+    }
 }

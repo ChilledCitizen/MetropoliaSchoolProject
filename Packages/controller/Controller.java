@@ -54,6 +54,7 @@ public class Controller extends Application {
             {
                 public void handle(KeyEvent event)
                 {
+                    double angle;
                     switch(event.getCode()) {
                         case SPACE:
                             if (controller.ammo.position.equals(Ammo.startingPos)
@@ -64,7 +65,9 @@ public class Controller extends Application {
                         case R:
                             controller.ammo.position.setLocation(Ammo.startingPos);
                             controller.ammo.stop();
+                            angle = controller.cp.stopAngle;
                             controller.cp.reset();
+                            controller.cp.stopAngle = angle;
                             break;
                             
                         case ENTER: 
@@ -75,11 +78,18 @@ public class Controller extends Application {
                             for (int i = 0; i < 4; i++) {
                             controller.enemyList.add(new Enemy(400 + i*100));
                             }
+                            angle = controller.cp.stopAngle;
                             controller.cp.reset();
+                            controller.cp.stopAngle = angle;
                             break;
                             
-                            
-                           
+                        case LEFT:
+                            controller.cp.stopAngle = Math.min(controller.cp.stopAngle + 5, 180);
+                            break;
+
+                        case RIGHT:
+                            controller.cp.stopAngle = Math.max(controller.cp.stopAngle - 5, 90);
+                            break;
                     }
                 }
             });

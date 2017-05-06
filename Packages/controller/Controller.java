@@ -120,6 +120,7 @@ public class Controller extends Application {
                 enemyIter.remove();
             }
         }
+        this.updateWall();
     }
 
     void updateView() {

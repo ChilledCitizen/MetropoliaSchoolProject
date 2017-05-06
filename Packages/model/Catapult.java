@@ -16,7 +16,7 @@ public class Catapult {
     private int armLength;
     private Point2D middle;
     public Point2D arm;
-    private double stopAngle;
+    public double stopAngle;
 
     public Catapult(int position, Ammo ammo) {
         this.position = position;

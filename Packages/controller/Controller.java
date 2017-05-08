@@ -172,8 +172,8 @@ public class Controller extends Application {
         
         
         if (this.wall.checkHit(this.ammo.getCircle())){
-            this.wall.takeDamage(100);
-            //this.wall.takeDamage(100);
+            this.ammo.velocity.setLocation(-this.ammo.velocity.getX(), this.ammo.velocity.getY());
+            this.wall.takeDamage(5);
         }
         if (this.wall.HP <= 0){
             System.exit(1);

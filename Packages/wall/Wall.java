@@ -1,10 +1,11 @@
 package wall;
 
+import java.awt.geom.Ellipse2D;
+
 import enemy.Enemy;
 
 public class Wall {
 
-    Enemy vihu = new Enemy(600);
     public double HP;
     public double height;
     public double width;
@@ -20,13 +21,9 @@ public class Wall {
         
     }
 
-    public boolean checkHit() {
-        if (vihu.getPosition() == this.position) {
-            return true;
-        }
-        return false;
+    public boolean checkHit(Ellipse2D ellipse) {
+        return (ellipse.intersects(this.position, 500, this.width, this.height));
     }
-//?????
 
     public double takeDamage(double damage) {
 

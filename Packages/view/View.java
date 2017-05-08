@@ -12,10 +12,10 @@ import model.Catapult;
 import wall.Wall;
 
 public class View {
+    static Image background = new Image("images/background.png");
 
     static public void drawBackground(GraphicsContext gc, double width, double height) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, width, height);
+        gc.drawImage(background, 0, 0);
     }
 
     static public void drawAmmo(GraphicsContext gc, Ammo ammo) {

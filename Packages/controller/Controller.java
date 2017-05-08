@@ -191,9 +191,14 @@ public class Controller extends Application {
         
         
         if (this.wall.checkHit(this.ammo.getCircle())){
-            this.ammo.velocity.setLocation(-this.ammo.velocity.getX(), this.ammo.velocity.getY());
-            this.wall.takeDamage(5);
-
+            if (this.ammo.position.getX() - this.ammo.velocity.getX() + this.ammo.radius >= this.wall.position) {
+                this.ammo.position.setLocation(this.ammo.position.getX(), 600 - this.wall.height - 2*this.ammo.radius);
+                this.ammo.stop();
+            }
+            else {
+                this.ammo.velocity.setLocation(-this.ammo.velocity.getX(), this.ammo.velocity.getY());
+                this.wall.takeDamage(5);
+            }
         }
         if (this.wall.HP <= 0) {
             System.exit(1);

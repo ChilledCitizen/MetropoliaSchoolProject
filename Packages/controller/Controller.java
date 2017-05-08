@@ -43,7 +43,7 @@ public class Controller extends Application {
         }
         createSliders();
 
-        primaryStage.setTitle("Drawing Operations Test");
+        primaryStage.setTitle("Catapult Simulation");
         Group root = new Group();
         root.getChildren().add(this.canvas);
         Scene scene = new Scene(root);

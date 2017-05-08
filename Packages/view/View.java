@@ -57,7 +57,7 @@ public class View {
 
     static public void drawAngle(GraphicsContext gc, double angle) {
         gc.setFill(Color.BLACK);
-        gc.fillText(String.valueOf(angle), 5, 10);
+        gc.fillText("Angle: " + angle, 5, 10);
     }
 
     static public void drawWave(GraphicsContext gc, int wave) {

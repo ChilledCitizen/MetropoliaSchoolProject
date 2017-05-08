@@ -54,7 +54,7 @@ public class Enemy {
         }
     }
     private static Animations animations = new Animations();
-    private String state = "walking";
+    private String state = "idle";
     private Iterator<Image> animation;
     private Image image;
     private HashMap<String, ArrayList<Image>> states;
@@ -77,6 +77,12 @@ public class Enemy {
 
     public String getState() {
         return this.state;
+    }
+
+    public void setState(String state) {
+        if (state.equals("walking")) {
+            this.state = state;
+        }
     }
 
     public boolean checkHit(Ellipse2D ellipse) {

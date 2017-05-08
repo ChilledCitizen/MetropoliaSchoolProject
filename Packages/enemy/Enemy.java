@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 
 public class Enemy {
     private double position;
-    private int speed = 1;
+    private double speed = 1;
     private int frameDuration = 100;
     public boolean visible = true;
     private double milliSeconds = 0;
@@ -83,6 +83,10 @@ public class Enemy {
         if (state.equals("walking")) {
             this.state = state;
         }
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
     public boolean checkHit(Ellipse2D ellipse) {

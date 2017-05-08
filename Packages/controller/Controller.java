@@ -60,6 +60,11 @@ public class Controller extends Application {
                             if (controller.ammo.position.equals(Ammo.startingPos)
                                     && controller.ammo.velocity.equals(new Point2D.Double(0.0, 0.0))) {
                                 cp.shoot();
+                                for (Enemy enemy : enemyList) {
+                                    if (enemy.getState().equals("idle")) {
+                                        enemy.setState("walking");
+                                    }
+                                }
                             }
                             break;
                         case R:

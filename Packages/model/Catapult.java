@@ -53,8 +53,8 @@ public class Catapult {
                 this.ammo.enableGravity();
                 Point2D startingPos = new Point2D.Double(
                     this.armLength*Math.cos(Math.toRadians(180)) + 50, -this.armLength*Math.sin(Math.toRadians(180)) + 563);
-                Point2D velocity = new Point2D.Double(startingPos.distance(this.arm)*Math.cos(Math.toRadians(this.angle - 90)),
-                    -2*startingPos.distance(this.arm)*Math.sin(Math.toRadians(this.angle - 90)));
+                Point2D velocity = new Point2D.Double(startingPos.distance(this.arm)*Math.cos(Math.toRadians(this.stopAngle - 90)),
+                    -2*startingPos.distance(this.arm)*Math.sin(Math.toRadians(this.stopAngle - 90)));
                 this.ammo.scaleAddAssign(this.ammo.velocity, 0.4, velocity);
             }
         }

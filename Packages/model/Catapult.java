@@ -42,7 +42,7 @@ public class Catapult {
     public void update(double time){
         Point2D ammoCenter = new Point2D.Double(this.ammo.getCircle().getCenterX(), this.ammo.getCircle().getCenterY());
         if (this.shooting && this.arm.distance(ammoCenter) <= this.ammo.radius) {
-            this.rotationSpeed += this.arm.distance(this.middle)*time/40.0;
+            this.rotationSpeed += this.arm.distance(this.middle)*time/400.0;
             this.angle -= this.rotationSpeed * time / 160.0;
             this.arm = new Point2D.Double(
                 this.armLength*Math.cos(Math.toRadians(this.angle)) + 50, -this.armLength*Math.sin(Math.toRadians(this.angle)) + 563);

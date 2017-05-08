@@ -43,6 +43,9 @@ public class Controller extends Application {
         for (int i = 0; i < enemyNum; i++) {
             this.enemyList.add(new Enemy(400 + i*(400 / enemyNum)));
         }
+        for (Enemy enemy : this.enemyList) {
+            enemy.setSpeed(1+ this.wave / 10.0);
+        }
     }
 
     @Override

@@ -12,10 +12,10 @@ import model.Catapult;
 import wall.Wall;
 
 public class View {
+    static Image background = new Image("images/background.png");
 
     static public void drawBackground(GraphicsContext gc, double width, double height) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, width, height);
+        gc.drawImage(background, 0, 0);
     }
 
     static public void drawAmmo(GraphicsContext gc, Ammo ammo) {
@@ -57,6 +57,11 @@ public class View {
 
     static public void drawAngle(GraphicsContext gc, double angle) {
         gc.setFill(Color.BLACK);
-        gc.fillText(String.valueOf(angle), 5, 10);
+        gc.fillText("Angle: " + angle, 5, 10);
+    }
+
+    static public void drawWave(GraphicsContext gc, int wave) {
+        gc.setFill(Color.BLACK);
+        gc.fillText("Wave: " + wave, 5, 25);
     }
 }

@@ -24,25 +24,31 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
 public class Controller extends Application {
-    private ArrayList<Enemy> enemyList;
+    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
     private Wall wall = new Wall(150,25,120,100);
     private Ammo ammo = new Ammo();
     private Catapult cp = new Catapult(0, ammo);
     private Canvas canvas = new Canvas(800, 600);
     private GraphicsContext gc = this.canvas.getGraphicsContext2D();
+    private int wave = 1;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    private void createEnemies() {
+        this.enemyList.clear();
+        int enemyNum = 4 + (int) Math.floor(this.wave / 3.0);
+        this.enemyList.ensureCapacity(enemyNum);
+        for (int i = 0; i < enemyNum; i++) {
+            this.enemyList.add(new Enemy(400 + i*(400 / enemyNum)));
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        this.enemyList = new ArrayList<Enemy>(10);
-        for (int i = 1; i < 4; i++) {
-            enemyList.add(new Enemy(400 + i*100));
-        }
         createSliders();
-
+        this.createEnemies();
         primaryStage.setTitle("Catapult Simulation");
         Group root = new Group();
         root.getChildren().add(this.canvas);
@@ -75,17 +81,23 @@ public class Controller extends Application {
                             controller.cp.stopAngle = angle;
                             break;
                             
-                        case ENTER: 
-                            controller.ammo.position.setLocation(Ammo.startingPos);
-                            controller.ammo.stop();
-                            controller.wall.HP = 100;
-                            controller.enemyList.clear();
-                            for (int i = 0; i < 4; i++) {
-                            controller.enemyList.add(new Enemy(400 + i*100));
+                        case ENTER:
+                            boolean noneVisible = true;
+                            for (Enemy enemy : controller.enemyList) {
+                                if (enemy.visible) {
+                                    noneVisible = false;
+                                    break;
+                                }
                             }
-                            angle = controller.cp.stopAngle;
-                            controller.cp.reset();
-                            controller.cp.stopAngle = angle;
+                            if (noneVisible) {
+                                controller.wave++;
+                                controller.ammo.position.setLocation(Ammo.startingPos);
+                                controller.ammo.stop();
+                                angle = controller.cp.stopAngle;
+                                controller.cp.reset();
+                                controller.cp.stopAngle = angle;
+                                controller.createEnemies();
+                            }
                             break;
                             
                         case LEFT:

@@ -112,9 +112,9 @@ public class Enemy {
             this.animate(deltaTime);   
         }
         if (this.state.equals("walking")) {
-            this.position -= this.speed * deltaTime / 10;
+            this.position -= this.speed * deltaTime / 15;
         }
-        if (this.position < 125 && this.state.equals("walking")) {
+        if (this.position < 175 && this.state.equals("walking")) {
             this.state = "attack";
             this.animation = this.states.get(this.state).iterator();
         }

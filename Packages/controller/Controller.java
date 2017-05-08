@@ -25,7 +25,7 @@ import javax.swing.JSlider;
 
 public class Controller extends Application {
     private ArrayList<Enemy> enemyList;
-    private Wall wall = new Wall(100,25,120,100);
+    private Wall wall = new Wall(150,25,120,100);
     private Ammo ammo = new Ammo();
     private Catapult cp = new Catapult(0, ammo);
     private Canvas canvas = new Canvas(800, 600);

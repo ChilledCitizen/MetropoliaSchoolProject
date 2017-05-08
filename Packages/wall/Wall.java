@@ -22,7 +22,7 @@ public class Wall {
     }
 
     public boolean checkHit(Ellipse2D ellipse) {
-        return (ellipse.intersects(this.position, 500, this.width, this.height));
+        return (ellipse.intersects(this.position, 600 - this.height, this.width, this.height));
     }
 
     public double takeDamage(double damage) {

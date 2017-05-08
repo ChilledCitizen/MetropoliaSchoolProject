@@ -150,7 +150,7 @@ public class Controller extends Application {
     void updateWall(){
         
         
-        if (this.wall.checkHit()){
+        if (this.wall.checkHit(this.ammo.getCircle())){
             this.wall.takeDamage(100);
             //this.wall.takeDamage(100);
         }

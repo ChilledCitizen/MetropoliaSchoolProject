@@ -32,7 +32,7 @@ public class Catapult {
         this.middle = new Point2D.Double(50, 563);
         this.arm = new Point2D.Double(
             this.armLength*Math.cos(Math.toRadians(this.angle)) + 50, -this.armLength*Math.sin(Math.toRadians(this.angle)) + 563);
-        this.stopAngle = 90;
+        this.stopAngle = 135;
     }
 
     public void shoot() {

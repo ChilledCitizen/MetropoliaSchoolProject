@@ -158,15 +158,21 @@ public class Controller extends Application {
             System.exit(1);
         }
     }
-    private void createSliders() {
-        JPanel gUI = new JPanel(new GridLayout(1,0));
+    void createSliders() {
+
+        GridPane grid = new GridPane();
         
-        gUI.add(new JLabel("Angle"));
-        JSlider angleSlider = new JSlider(0, 90);
-        gUI.add(angleSlider);
+        Label angleLabel = new Label("Angle");
+        Slider angleSlider = new Slider();
+        angleSlider.setMin(0);
+        angleSlider.setMax(90);
+        angleLabel.setVisible(true);
         
-        gUI.add(new JLabel("Force"));
-        JSlider forceSlider = new JSlider(0,100);
-        gUI.add(forceSlider);
+        Label forceLabel = new Label("Force");
+        Slider forceSlider = new Slider();
+        forceSlider.setMin(0);
+        forceSlider.setMax(100);
+        forceSlider.setVisible(true);
+                       
     }
 }

@@ -12,18 +12,26 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
+import javafx.util.Duration;
 
 import view.View;
 import enemy.Enemy;
 import wall.Wall;
 import model.Catapult;
 import ammo.Ammo;
+import java.io.File;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
 public class Controller extends Application {
+
+    private static MediaPlayer wmp = new MediaPlayer(new Media(new File("sounds/tch.wav").toURI().toString()));
+    private static MediaPlayer mp = new MediaPlayer(new Media(new File("sounds/scr.wav").toURI().toString()));
     private ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
     private Wall wall = new Wall(150,25,120,100);
     private Ammo ammo = new Ammo();
@@ -144,8 +152,16 @@ public class Controller extends Application {
             enemy.update(deltaTime);
             if (enemy.checkHit(this.ammo.getCircle())) {
                 enemy.kill();
+                if (mp.getStatus() != Status.PLAYING || mp.getCurrentTime().greaterThanOrEqualTo(mp.getStopTime())) {
+                    mp.seek(new Duration(0));
+                    mp.play(); 
+                } 
             }
             if (! enemy.visible && enemy.getState().equals("attack")) {
+                if (wmp.getStatus() != Status.PLAYING || wmp.getCurrentTime().greaterThanOrEqualTo(wmp.getStopTime())) {
+                    wmp.seek(new Duration(0));
+                    wmp.play(); 
+                } 
                 this.wall.takeDamage(25);
                 enemyIter.remove();
             }

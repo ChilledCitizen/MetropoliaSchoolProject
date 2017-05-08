@@ -18,10 +18,10 @@ import enemy.Enemy;
 import wall.Wall;
 import model.Catapult;
 import ammo.Ammo;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 
 public class Controller extends Application {
     private ArrayList<Enemy> enemyList;

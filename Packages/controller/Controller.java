@@ -162,6 +162,7 @@ public class Controller extends Application {
         View.drawHealthBar(this.gc, this.wall);
         View.drawCatapult(this.gc, this.cp);
         View.drawAngle(this.gc, this.cp.stopAngle);
+        View.drawWave(this.gc, this.wave);
     }
     
     void updateWall(){

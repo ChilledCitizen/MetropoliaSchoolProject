@@ -59,4 +59,9 @@ public class View {
         gc.setFill(Color.BLACK);
         gc.fillText(String.valueOf(angle), 5, 10);
     }
+
+    static public void drawWave(GraphicsContext gc, int wave) {
+        gc.setFill(Color.BLACK);
+        gc.fillText("Wave: " + wave, 5, 25);
+    }
 }

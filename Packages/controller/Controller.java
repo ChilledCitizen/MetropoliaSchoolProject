@@ -27,14 +27,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
 public class Controller extends Application {
-<<<<<<< HEAD
 
     private ArrayList<Enemy> enemyList;
     private Wall wall = new Wall(150, 25, 120, 100);
-=======
-    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>(10);
-    private Wall wall = new Wall(150,25,120,100);
->>>>>>> 9d9a41e4a61b28c18ec2e6671cd9868b265e8258
+
+    
     private Ammo ammo = new Ammo();
     private Catapult cp = new Catapult(0, ammo);
     private Canvas canvas = new Canvas(800, 600);
@@ -59,13 +56,12 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-<<<<<<< HEAD
+
         this.enemyList = new ArrayList<Enemy>(10);
         for (int i = 1; i < 4; i++) {
             enemyList.add(new Enemy(400 + i * 100));
         }
-=======
->>>>>>> 9d9a41e4a61b28c18ec2e6671cd9868b265e8258
+
         createSliders();
         this.createEnemies();
         primaryStage.setTitle("Catapult Simulation");
@@ -89,7 +85,7 @@ public class Controller extends Application {
                                     enemy.setState("walking");
                                 }
                             }
-<<<<<<< HEAD
+
                         }
                         break;
                     case R:
@@ -120,46 +116,11 @@ public class Controller extends Application {
                     case RIGHT:
                         controller.cp.stopAngle = Math.max(controller.cp.stopAngle - 5, 90);
                         break;
-=======
-                            break;
-                        case R:
-                            controller.ammo.position.setLocation(Ammo.startingPos);
-                            controller.ammo.stop();
-                            angle = controller.cp.stopAngle;
-                            controller.cp.reset();
-                            controller.cp.stopAngle = angle;
-                            break;
-                            
-                        case ENTER:
-                            boolean noneVisible = true;
-                            for (Enemy enemy : controller.enemyList) {
-                                if (enemy.visible) {
-                                    noneVisible = false;
-                                    break;
-                                }
-                            }
-                            if (noneVisible) {
-                                controller.wave++;
-                                controller.ammo.position.setLocation(Ammo.startingPos);
-                                controller.ammo.stop();
-                                angle = controller.cp.stopAngle;
-                                controller.cp.reset();
-                                controller.cp.stopAngle = angle;
-                                controller.createEnemies();
-                            }
-                            break;
-                            
-                        case LEFT:
-                            controller.cp.stopAngle = Math.min(controller.cp.stopAngle + 5, 180);
-                            break;
 
-                        case RIGHT:
-                            controller.cp.stopAngle = Math.max(controller.cp.stopAngle - 5, 90);
-                            break;
                     }
->>>>>>> 9d9a41e4a61b28c18ec2e6671cd9868b265e8258
+
                 }
-            }
+            
         });
         primaryStage.setScene(scene);
 
@@ -224,14 +185,7 @@ public class Controller extends Application {
         View.drawAngle(this.gc, this.cp.stopAngle);
         View.drawWave(this.gc, this.wave);
     }
-<<<<<<< HEAD
 
-    void updateWall() {
-
-        if (this.wall.checkHit(this.ammo.getCircle())) {
-            this.wall.takeDamage(100);
-            //this.wall.takeDamage(100);
-=======
     
     void updateWall(){
         
@@ -239,7 +193,7 @@ public class Controller extends Application {
         if (this.wall.checkHit(this.ammo.getCircle())){
             this.ammo.velocity.setLocation(-this.ammo.velocity.getX(), this.ammo.velocity.getY());
             this.wall.takeDamage(5);
->>>>>>> 9d9a41e4a61b28c18ec2e6671cd9868b265e8258
+
         }
         if (this.wall.HP <= 0) {
             System.exit(1);
